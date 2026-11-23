@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeRub - Roblox Game Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1020;color:white;font-family:Arial,sans-serif}
+header{padding:22px 8%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #28304a}
+.logo{font-size:27px;font-weight:bold;color:#a78bfa}
+.tag{background:#252044;padding:8px 14px;border-radius:20px;font-size:12px}
+.hero{text-align:center;padding:75px 20px 55px}
+h1{font-size:55px;margin:15px 0;background:linear-gradient(90deg,#fff,#a78bfa,#22d3ee);color:transparent;background-clip:text}
+.hero p{color:#a8b2ca;font-size:18px}
+.search{margin:30px auto;max-width:550px;display:flex;gap:8px}
+input{flex:1;min-width:0;padding:16px;border-radius:12px;border:1px solid #39425e;background:#182139;color:white;font-size:16px}
+button{background:#8055e8;color:white;border:0;padding:14px 20px;border-radius:10px;cursor:pointer;font-weight:bold}
+main{max-width:1050px;margin:auto;padding:20px}
+h2{font-size:25px}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{background:#151e33;border:1px solid #29334d;border-radius:16px;padding:22px}
+.card h3{margin-top:0;font-size:20px}
+.card p{color:#a8b2ca;line-height:1.5}
+.card button{background:#292346}
+.icon{font-size:32px;margin-bottom:10px}
+footer{text-align:center;padding:35px;color:#8793ad;font-size:13px}
+.notice{color:#9ca9c4;font-size:13px;margin-top:30px;line-height:1.6}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">🎮 CodeRub</div>
+ <div class="tag">ROBLOX GAME CODES</div>
+</header>
+
+<section class="hero">
+ <div style="color:#a78bfa;font-weight:bold">YOUR REWARD STARTS HERE</div>
+ <h1>Find codes.<br>Claim rewards.</h1>
+ <p>Discover Roblox game codes in one place.</p>
+ <div class="search">
+  <input id="search" placeholder="Search your favourite game...">
+  <button onclick="searchGames()">Search</button>
+ </div>
+</section>
+
+<main>
+ <h2>🔥 Popular Games</h2>
+ <div class="games" id="games">
+  <div class="card" data-name="anime adventures">
+   <div class="icon">⚔️</div>
+   <h3>Anime Adventures</h3>
+   <p>Find codes and rewards for Anime Adventures.</p>
+   <button onclick="openGame('Anime Adventures')">View codes →</button>
+  </div>
+  <div class="card" data-name="blox fruits">
+   <div class="icon">🍎</div>
+   <h3>Blox Fruits</h3>
+   <p>Discover Blox Fruits code updates and rewards.</p>
+   <button onclick="openGame('Blox Fruits')">View codes →</button>
+  </div>
+  <div class="card" data-name="blade ball">
+   <div class="icon">🏐</div>
+   <h3>Blade Ball</h3>
+   <p>Find Blade Ball rewards and code information.</p>
+   <button onclick="openGame('Blade Ball')">View codes →</button>
+  </div>
+  <div class="card" data-name="dress to impress">
+   <div class="icon">👗</div>
+   <h3>Dress to Impress</h3>
+   <p>Find the latest code updates for DTI.</p>
+   <button onclick="openGame('Dress to Impress')">View codes →</button>
+  </div>
+  <div class="card" data-name="king legacy">
+   <div class="icon">👑</div>
+   <h3>King Legacy</h3>
+   <p>Explore King Legacy code information.</p>
+   <button onclick="openGame('King Legacy')">View codes →</button>
+  </div>
+  <div class="card" data-name="pet simulator 99">
+   <div class="icon">🐾</div>
+   <h3>Pet Simulator 99</h3>
+   <p>Find rewards and code updates.</p>
+   <button onclick="openGame('Pet Simulator 99')">View codes →</button>
+  </div>
+ </div>
+ <p id="empty" style="display:none;color:#aaa">No games found.</p>
+ <div class="notice">
+  CodeRub is an independent fan-made website. It is not affiliated with or endorsed by Roblox. Codes may expire; always verify them in the official game.
+ </div>
+</main>
+
+<footer>© 2026 CodeRub · Made for Roblox players</footer>
+
+<script>
+function searchGames(){
+ let q=document.getElementById('search').value.toLowerCase();
+ let cards=document.querySelectorAll('.card');
+ let count=0;
+ cards.forEach(card=>{
+  let match=card.dataset.name.includes(q);
+  card.style.display=match?'block':'none';
+  if(match)count++;
+ });
+ document.getElementById('empty').style.display=count?'none':'block';
+}
+function openGame(name){
+ alert(name+' code page coming soon! We will add verified codes here.');
+}
+document.getElementById('search').addEventListener('input',searchGames);
+</script>
+</body>
+</html>
