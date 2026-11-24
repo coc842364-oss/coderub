@@ -4,37 +4,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Roblox Game Codes | CodeRub</title>
-<meta name="description" content="Find Roblox game codes, free rewards and the latest code updates on CodeRub.">
+<title>Roblox Codes - CodeRub</title>
+<meta name="description" content="Find Roblox game codes, rewards and updates on CodeRub.">
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#0b1020;color:#f4f6ff;font-family:Arial,sans-serif}
 header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #29334d}
 .logo{font-size:27px;font-weight:900;color:#a78bfa}
-.tag,.status{background:#252044;padding:7px 12px;border-radius:20px;font-size:12px}
-.hero{text-align:center;padding:60px 20px 35px}
-h1{font-size:clamp(38px,7vw,58px);margin:10px;background:linear-gradient(90deg,#fff,#a78bfa,#22d3ee);color:transparent;background-clip:text}
+.tag{background:#252044;padding:8px 13px;border-radius:20px;font-size:12px}
+.hero{text-align:center;padding:55px 20px 35px}
+h1{font-size:clamp(38px,7vw,58px);margin:12px;background:linear-gradient(90deg,#fff,#a78bfa,#22d3ee);color:transparent;background-clip:text}
 .hero p,.muted{color:#a8b2ca}
-.search{display:flex;gap:8px;max-width:550px;margin:25px auto}
-input{flex:1;min-width:0;padding:14px;border-radius:10px;border:1px solid #39425e;background:#182139;color:white;font-size:16px}
+.search{display:flex;gap:8px;max-width:600px;margin:25px auto}
+input{flex:1;min-width:0;padding:15px;border-radius:10px;border:1px solid #39425e;background:#182139;color:white;font-size:16px}
 button{background:#8055e8;color:white;border:0;padding:12px 17px;border-radius:9px;cursor:pointer;font-weight:bold}
-main{max-width:1000px;margin:auto;padding:20px}
-.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}
+main{max-width:1100px;margin:auto;padding:20px}
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}
+.filters button{background:#202b43;border:1px solid #35415c}
+.filters button.selected{background:#8055e8}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
 .card,.codebox{background:#151e33;border:1px solid #29334d;border-radius:15px;padding:19px}
-.card h3{margin:5px 0 10px}
-.card p{color:#a8b2ca;font-size:14px;line-height:1.5}
-.card button{background:#292346}
-#codePage{display:none;margin-top:28px}
-.back{background:#26314a;margin-bottom:20px}
+.card{cursor:pointer;transition:.18s}
+.card:hover{transform:translateY(-3px);border-color:#8b5cf6}
+.card h3{margin:8px 0}
+.card p{color:#a8b2ca;font-size:13px;line-height:1.5}
+.gameicon{font-size:30px}
+.status{display:inline-block;background:#183c32;color:#7ee7b4;padding:5px 9px;border-radius:20px;font-size:11px}
+.status.none{background:#393044;color:#d5b9f8}
+#gamePage{display:none;margin-top:20px}
+.back{background:#26314a;margin-bottom:15px}
 .code-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #29334d}
 .code-row:last-child{border:0}
 .code{font-weight:bold;color:#c4b5fd;overflow-wrap:anywhere}
 .reward{font-size:13px;color:#a8b2ca;margin-top:4px}
 .copy{padding:9px 13px;flex-shrink:0}
-h2{margin-top:25px}
 .note{font-size:13px;color:#a8b2ca;line-height:1.6;background:#151e33;padding:15px;border-radius:12px;margin-top:25px}
 footer{text-align:center;padding:35px;color:#8793ad;font-size:13px}
-@media(max-width:500px){header{padding:17px}.code-row{align-items:flex-start}.copy{padding:9px}}
+@media(max-width:500px){header{padding:17px}.code-row{align-items:flex-start}}
 </style>
 </head>
 <body>
@@ -46,179 +52,222 @@ footer{text-align:center;padding:35px;color:#8793ad;font-size:13px}
 <section class="hero">
  <div style="color:#a78bfa;font-weight:bold">YOUR NEXT REWARD STARTS HERE</div>
  <h1>Find codes.<br>Claim rewards.</h1>
- <p>Search games and copy your favourite codes.</p>
+ <p>Popular Roblox games and their latest code lists.</p>
  <div class="search">
-  <input id="search" placeholder="Search games..." oninput="searchGames()">
-  <button onclick="searchGames()">Search</button>
+  <input id="search" placeholder="Search any Roblox game..." oninput="render()">
+  <button onclick="render()">Search</button>
  </div>
 </section>
 
 <main>
- <section id="home">
-  <h2>🔥 Popular games</h2>
-  <div class="games" id="games">
-   <div class="card" data-name="anime adventures">
-    <div style="font-size:30px">⚔️</div>
-    <h3>Anime Adventures</h3>
-    <p>Gems, Star Remnants and more rewards.</p>
-    <button onclick="openGame('anime')">View codes →</button>
-   </div>
-   <div class="card" data-name="blox fruits">
-    <div style="font-size:30px">🍎</div>
-    <h3>Blox Fruits</h3>
-    <p>XP boosts, stat resets and rewards.</p>
-    <button onclick="openGame('blox')">View codes →</button>
-   </div>
-  </div>
-  <p id="empty" style="display:none;color:#aaa">No games found.</p>
- </section>
+ <h2 id="heading">🔥 Popular Roblox games</h2>
+ <div class="filters">
+  <button class="selected" onclick="setFilter('all',this)">All games</button>
+  <button onclick="setFilter('codes',this)">Games with codes</button>
+  <button onclick="setFilter('coming',this)">More games</button>
+ </div>
+ <div class="grid" id="games"></div>
+ <p id="empty" style="display:none;color:#aaa">No games found.</p>
 
- <section id="codePage">
+ <section id="gamePage">
   <button class="back" onclick="goHome()">← Back to games</button>
   <h2 id="gameTitle"></h2>
   <p class="muted" id="gameDescription"></p>
-  <p class="muted">Last checked: November 24, 2026. Check codes in-game before relying on them.</p>
+  <p class="muted">Tracker-reported codes · Checked November 24, 2026. Not personally tested in-game.</p>
   <div class="codebox">
-   <h3>🟢 Codes listed as active</h3>
+   <h3>🟢 Codes reported active</h3>
    <div id="activeCodes"></div>
   </div>
   <div class="codebox" style="margin-top:15px">
    <h3>🟡 Unconfirmed codes</h3>
-   <div id="unconfirmedCodes"></div>
+   <div id="pendingCodes"></div>
   </div>
-  <div class="note">
-   Codes can expire at any time and may have level or account requirements.
-   CodeRub does not guarantee that a code will work for every player.
-  </div>
+  <div class="note">Codes may expire at any time. Rewards and requirements can change. If a code doesn't work, it may have expired or already been redeemed on your account.</div>
  </section>
 
  <div class="note">
-  CodeRub is an independent fan-made website. It is not affiliated with or endorsed by Roblox or the game developers.
+  CodeRub is an independent fan-made website. It is not affiliated with, endorsed by, or sponsored by Roblox or the game developers.
  </div>
 </main>
 
 <footer>© 2026 CodeRub · Made for Roblox players</footer>
 
 <script>
-const database = {
- anime:{
-  title:"Anime Adventures Codes",
-  description:"Redeem codes for free Anime Adventures rewards.",
-  active:[
-   ["2MILLIONFAVES","1 Star Remnant and 2,000 Gems · Level 20+"],
-   ["SUMMERCOMEBACK","Free rewards · Level 20+"],
-   ["CELESTIALCOMPASSU21","Celestial Compass and reported 500 Gems"],
-   ["AACOMEBACK","Free rewards · Level 10+"],
-   ["APRILFOOLS","Free rewards · Level 20+ · Status may vary"]
-  ],
-  pending:[
-   ["SWORDSMITH","Newly reported reward · Level 20+ · Not yet confirmed across trackers"]
-  ]
- },
- blox:{
-  title:"Blox Fruits Codes",
-  description:"Redeem codes for XP boosts, stat resets and other rewards.",
-  active:[
-   ["EASTEREXP","2x EXP boost · 20 minutes"],
-   ["LIGHTNINGABUSE","2x EXP boost · 20 minutes"],
-   ["SUB2GAMERROBOT_RESET1","Free stat reset"],
-   ["Chandler","Joke code · 0 cash"],
-   ["Axiore","2x EXP boost"],
-   ["Bignews","In-game title"],
-   ["Bluxxy","2x EXP boost"],
-   ["Enyu_is_Pro","2x EXP boost"],
-   ["Fudd10","1 Beli"],
-   ["Fudd10_v2","2 Beli"],
-   ["JCWK","2x EXP boost"],
-   ["KITT_RESET","Free stat reset"],
-   ["Kittgaming","2x EXP boost"],
-   ["Magicbus","2x EXP boost"],
-   ["Starcodeheo","2x EXP boost"],
-   ["StrawHatMaine","2x EXP boost"],
-   ["Sub2CaptainMaui","2x EXP boost"],
-   ["Sub2Daigrock","2x EXP boost"],
-   ["Sub2Fer999","2x EXP boost"],
-   ["SUB2GAMERROBOT_EXP1","2x EXP boost · 30 minutes"],
-   ["Sub2NoobMaster123","2x EXP boost"],
-   ["Sub2OfficialNoobie","2x EXP boost"],
-   ["Sub2UncleKizaru","Free stat reset"],
-   ["TantaiGaming","2x EXP boost"],
-   ["TheGreatAce","2x EXP boost"]
-  ],
-  pending:[]
- }
-};
+const games=[
+ {name:"Steal An Egg",icon:"🥚",type:"Simulator",codes:[]},
+ {name:"Brookhaven RP",icon:"🏡",type:"Roleplay",codes:[]},
+ {name:"Blox Fruits",icon:"🍎",type:"Adventure",codes:[
+  ["fudd10","Small Beli reward"],
+  ["fudd10_V2","Beli reward"],
+  ["Chandler","Joke code · 0 Beli"],
+  ["KITT_RESET","Stat reset"]
+ ]},
+ {name:"Throw Food For Animals",icon:"🍔",type:"Simulator",codes:[]},
+ {name:"Adopt Me!",icon:"🐶",type:"Pets and roleplay",codes:[]},
+ {name:"99 Nights in the Forest",icon:"🌲",type:"Survival",codes:[
+  ["awardwinner_yay","Free rewards"],
+  ["afterparty","Free rewards"],
+  ["forestwakesup26","15 Diamonds and 3 random Flames"]
+ ]},
+ {name:"RIVALS",icon:"🔫",type:"Shooter",codes:[
+  ["COMMUNITY27","Free rewards"],
+  ["NOSNIYGAMESONTOP","Free rewards"],
+  ["BACK2BACK","Free rewards"]
+ ]},
+ {name:"Murder Mystery 2",icon:"🔪",type:"Mystery",codes:[]},
+ {name:"Anime Adventures",icon:"⚔️",type:"Anime tower defense",codes:[
+  ["2MILLIONFAVES","1 Star Remnant and 2,000 Gems"],
+  ["CELESTIALCOMPASSU21","Celestial Compass and reported Gems"],
+  ["SUMMERCOMEBACK","Free rewards"]
+ ]},
+ {name:"Anime Crusaders X",icon:"🌟",type:"Anime strategy",codes:[
+  ["THANKYOUFOR30KMAJORFIXES","50 Trait Remnants and 1,000 Gems"]
+ ]},
+ {name:"Dandy's World",icon:"🌻",type:"Horror survival",codes:[
+  ["ICHOR","Free Ichor"],
+  ["AD2026","Free rewards"]
+ ]},
+ {name:"Fisch",icon:"🐟",type:"Fishing",codes:[
+  ["TurkeySoon","Free rewards"],
+  ["CARBON","Free rewards"],
+  ["SCARLET","Free rewards"]
+ ]},
+ {name:"Jujutsu Shenanigans",icon:"👊",type:"Fighting",codes:[
+  ["A7D2L26RNEPG74A3Q","Free rewards"],
+  ["RIA2026","Free rewards"]
+ ]},
+ {name:"Fish It!",icon:"🎣",type:"Fishing",codes:[
+  ["ELEMENTAL26","Free rewards"],
+  ["MERDEKA","Free rewards"],
+  ["WORMHYPE","Free rewards"]
+ ]},
+ {name:"Bee Swarm Simulator",icon:"🐝",type:"Simulator",codes:[
+  ["FOURtunate","Free rewards"],
+  ["BeesBuzz123","Free rewards"],
+  ["ClubBean","Free rewards"]
+ ]},
+ {name:"Evade",icon:"🏃",type:"Survival",codes:[
+  ["therealdeal","Free rewards"],
+  ["thebig5","Free rewards"],
+  ["apology","Free rewards"]
+ ]},
+ {name:"Dress To Impress",icon:"👗",type:"Fashion",codes:[
+  ["LEAHASHE","Pink top and pants"],
+  ["LANABOW","Pink bow accessory"],
+  ["KATSEYE","KATSEYE themed accessories"]
+ ]},
+ {name:"King Legacy",icon:"👑",type:"Adventure",codes:[
+  ["4BVISITS","Free rewards"],
+  ["MOBILEFIXED","Free rewards"],
+  ["HALLOWEENRESET","Stat reset"]
+ ]},
+ {name:"Sol's RNG",icon:"🎲",type:"RNG simulator",codes:[
+  ["Part2Halloween","Free rewards"],
+  ["RolledBack","Free rewards"],
+  ["SolsRNGUPD","Free rewards"]
+ ]},
+ {name:"Volleyball Legends",icon:"🏐",type:"Sports",codes:[
+  ["UPDATE_97","5 Lucky Style Spins"]
+ ]},
+ {name:"The Forge",icon:"⚒️",type:"Adventure RPG",codes:[]},
+ {name:"Pet Simulator 99",icon:"🐾",type:"Pet simulator",codes:[]},
+ {name:"Steal a Brainrot",icon:"🧠",type:"Simulator",codes:[],pending:[
+  ["BESTBRAINROTEVER","Reported brainrot reward · Needs fresh confirmation"]
+ ]},
+ {name:"Grow a Garden",icon:"🌱",type:"Simulator",codes:[],pending:[
+  ["RDCAward","Reported cosmetic reward · Needs fresh confirmation"]
+ ]},
+ {name:"Blade Ball",icon:"⚽",type:"Action",codes:[]},
+ {name:"Blue Lock: Rivals",icon:"⚽",type:"Sports anime",codes:[]},
+ {name:"Anime Vanguards",icon:"🛡️",type:"Tower defense",codes:[]},
+ {name:"Driving Empire",icon:"🚗",type:"Racing",codes:[]},
+ {name:"The Strongest Battlegrounds",icon:"🥊",type:"Fighting",codes:[]},
+ {name:"Forsaken",icon:"👻",type:"Horror survival",codes:[]},
+ {name:"DOORS",icon:"🚪",type:"Horror",codes:[]}
+];
 
-function makeCodeRow(item){
- const [code,reward]=item;
+let filter="all";
+function setFilter(value,button){
+ filter=value;
+ document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("selected"));
+ button.classList.add("selected");
+ render();
+}
+function render(){
+ const q=document.getElementById("search").value.toLowerCase().trim();
+ const list=games.filter(g=>{
+  const matches=g.name.toLowerCase().includes(q);
+  const category=filter==="all"||(filter==="codes"&&(g.codes.length||g.pending?.length))||(filter==="coming"&&!g.codes.length&&!g.pending?.length);
+  return matches&&category;
+ });
+ const grid=document.getElementById("games");
+ grid.replaceChildren();
+ list.forEach(g=>{
+  const card=document.createElement("div");
+  card.className="card";
+  card.innerHTML=`<div class="gameicon">${g.icon}</div><h3></h3><p></p><span class="status"></span>`;
+  card.querySelector("h3").textContent=g.name;
+  card.querySelector("p").textContent=g.type+" · "+(g.codes.length?g.codes.length+" listed codes":"Code list coming soon");
+  const badge=card.querySelector(".status");
+  badge.textContent=g.codes.length?"Codes listed":"Coming soon";
+  if(!g.codes.length)badge.className="status none";
+  card.onclick=()=>openGame(g.name);
+  grid.append(card);
+ });
+ document.getElementById("empty").style.display=list.length?"none":"block";
+}
+function makeRow(item){
  const row=document.createElement("div");
  row.className="code-row";
  const info=document.createElement("div");
  const name=document.createElement("div");
  name.className="code";
- name.textContent=code;
- const desc=document.createElement("div");
- desc.className="reward";
- desc.textContent=reward;
- info.append(name,desc);
+ name.textContent=item[0];
+ const reward=document.createElement("div");
+ reward.className="reward";
+ reward.textContent=item[1];
+ info.append(name,reward);
  const btn=document.createElement("button");
  btn.className="copy";
  btn.textContent="Copy";
  btn.onclick=async()=>{
-  try{
-   await navigator.clipboard.writeText(code);
-   btn.textContent="Copied!";
-   setTimeout(()=>btn.textContent="Copy",1300);
-  }catch(e){
-   const area=document.createElement("textarea");
-   area.value=code;
-   document.body.appendChild(area);
-   area.select();
-   document.execCommand("copy");
-   area.remove();
-   btn.textContent="Copied!";
-   setTimeout(()=>btn.textContent="Copy",1300);
+  try{await navigator.clipboard.writeText(item[0]);}
+  catch(e){
+   const t=document.createElement("textarea");
+   t.value=item[0];document.body.append(t);t.select();document.execCommand("copy");t.remove();
   }
+  btn.textContent="Copied!";
+  setTimeout(()=>btn.textContent="Copy",1200);
  };
  row.append(info,btn);
  return row;
 }
-
-function openGame(key){
- const game=database[key];
- document.getElementById("home").style.display="none";
- document.getElementById("codePage").style.display="block";
- document.getElementById("gameTitle").textContent=game.title;
- document.getElementById("gameDescription").textContent=game.description;
+function openGame(name){
+ const g=games.find(x=>x.name===name);
+ document.getElementById("heading").style.display="none";
+ document.getElementById("games").style.display="none";
+ document.querySelector(".filters").style.display="none";
+ document.getElementById("empty").style.display="none";
+ document.getElementById("gamePage").style.display="block";
+ document.getElementById("gameTitle").textContent=g.icon+" "+g.name+" Codes";
+ document.getElementById("gameDescription").textContent=g.type+" · Code list and rewards";
  const active=document.getElementById("activeCodes");
- const pending=document.getElementById("unconfirmedCodes");
- active.replaceChildren();
- pending.replaceChildren();
- game.active.forEach(item=>active.appendChild(makeCodeRow(item)));
- if(game.pending.length){
-  game.pending.forEach(item=>pending.appendChild(makeCodeRow(item)));
- }else{
-  pending.textContent="No unconfirmed codes currently listed.";
- }
+ const pending=document.getElementById("pendingCodes");
+ active.replaceChildren();pending.replaceChildren();
+ if(g.codes.length)g.codes.forEach(c=>active.append(makeRow(c)));
+ else active.textContent="No confirmed codes listed yet. Check back for updates.";
+ if(g.pending?.length)g.pending.forEach(c=>pending.append(makeRow(c)));
+ else pending.textContent="No unconfirmed codes currently listed.";
  window.scrollTo(0,0);
 }
-
 function goHome(){
- document.getElementById("codePage").style.display="none";
- document.getElementById("home").style.display="block";
- window.scrollTo(0,0);
+ document.getElementById("gamePage").style.display="none";
+ document.getElementById("heading").style.display="block";
+ document.getElementById("games").style.display="grid";
+ document.querySelector(".filters").style.display="flex";
+ render();
 }
-
-function searchGames(){
- const q=document.getElementById("search").value.toLowerCase().trim();
- let count=0;
- document.querySelectorAll(".card").forEach(card=>{
-  const match=card.dataset.name.includes(q);
-  card.style.display=match?"block":"none";
-  if(match)count++;
- });
- document.getElementById("empty").style.display=count?"none":"block";
-}
+render();
 </script>
 </body>
 </html>
