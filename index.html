@@ -3,112 +3,224 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CodeRub - Roblox Game Codes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roblox Game Codes | CodeRub</title>
+<meta name="description" content="Find Roblox game codes, free rewards and the latest code updates on CodeRub.">
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0b1020;color:white;font-family:Arial,sans-serif}
-header{padding:22px 8%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #28304a}
-.logo{font-size:27px;font-weight:bold;color:#a78bfa}
-.tag{background:#252044;padding:8px 14px;border-radius:20px;font-size:12px}
-.hero{text-align:center;padding:75px 20px 55px}
-h1{font-size:55px;margin:15px 0;background:linear-gradient(90deg,#fff,#a78bfa,#22d3ee);color:transparent;background-clip:text}
-.hero p{color:#a8b2ca;font-size:18px}
-.search{margin:30px auto;max-width:550px;display:flex;gap:8px}
-input{flex:1;min-width:0;padding:16px;border-radius:12px;border:1px solid #39425e;background:#182139;color:white;font-size:16px}
-button{background:#8055e8;color:white;border:0;padding:14px 20px;border-radius:10px;cursor:pointer;font-weight:bold}
-main{max-width:1050px;margin:auto;padding:20px}
-h2{font-size:25px}
-.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.card{background:#151e33;border:1px solid #29334d;border-radius:16px;padding:22px}
-.card h3{margin-top:0;font-size:20px}
-.card p{color:#a8b2ca;line-height:1.5}
+body{margin:0;background:#0b1020;color:#f4f6ff;font-family:Arial,sans-serif}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #29334d}
+.logo{font-size:27px;font-weight:900;color:#a78bfa}
+.tag,.status{background:#252044;padding:7px 12px;border-radius:20px;font-size:12px}
+.hero{text-align:center;padding:60px 20px 35px}
+h1{font-size:clamp(38px,7vw,58px);margin:10px;background:linear-gradient(90deg,#fff,#a78bfa,#22d3ee);color:transparent;background-clip:text}
+.hero p,.muted{color:#a8b2ca}
+.search{display:flex;gap:8px;max-width:550px;margin:25px auto}
+input{flex:1;min-width:0;padding:14px;border-radius:10px;border:1px solid #39425e;background:#182139;color:white;font-size:16px}
+button{background:#8055e8;color:white;border:0;padding:12px 17px;border-radius:9px;cursor:pointer;font-weight:bold}
+main{max-width:1000px;margin:auto;padding:20px}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}
+.card,.codebox{background:#151e33;border:1px solid #29334d;border-radius:15px;padding:19px}
+.card h3{margin:5px 0 10px}
+.card p{color:#a8b2ca;font-size:14px;line-height:1.5}
 .card button{background:#292346}
-.icon{font-size:32px;margin-bottom:10px}
+#codePage{display:none;margin-top:28px}
+.back{background:#26314a;margin-bottom:20px}
+.code-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #29334d}
+.code-row:last-child{border:0}
+.code{font-weight:bold;color:#c4b5fd;overflow-wrap:anywhere}
+.reward{font-size:13px;color:#a8b2ca;margin-top:4px}
+.copy{padding:9px 13px;flex-shrink:0}
+h2{margin-top:25px}
+.note{font-size:13px;color:#a8b2ca;line-height:1.6;background:#151e33;padding:15px;border-radius:12px;margin-top:25px}
 footer{text-align:center;padding:35px;color:#8793ad;font-size:13px}
-.notice{color:#9ca9c4;font-size:13px;margin-top:30px;line-height:1.6}
+@media(max-width:500px){header{padding:17px}.code-row{align-items:flex-start}.copy{padding:9px}}
 </style>
 </head>
 <body>
 <header>
  <div class="logo">🎮 CodeRub</div>
- <div class="tag">ROBLOX GAME CODES</div>
+ <div class="tag">ROBLOX CODES</div>
 </header>
 
 <section class="hero">
- <div style="color:#a78bfa;font-weight:bold">YOUR REWARD STARTS HERE</div>
+ <div style="color:#a78bfa;font-weight:bold">YOUR NEXT REWARD STARTS HERE</div>
  <h1>Find codes.<br>Claim rewards.</h1>
- <p>Discover Roblox game codes in one place.</p>
+ <p>Search games and copy your favourite codes.</p>
  <div class="search">
-  <input id="search" placeholder="Search your favourite game...">
+  <input id="search" placeholder="Search games..." oninput="searchGames()">
   <button onclick="searchGames()">Search</button>
  </div>
 </section>
 
 <main>
- <h2>🔥 Popular Games</h2>
- <div class="games" id="games">
-  <div class="card" data-name="anime adventures">
-   <div class="icon">⚔️</div>
-   <h3>Anime Adventures</h3>
-   <p>Find codes and rewards for Anime Adventures.</p>
-   <button onclick="openGame('Anime Adventures')">View codes →</button>
+ <section id="home">
+  <h2>🔥 Popular games</h2>
+  <div class="games" id="games">
+   <div class="card" data-name="anime adventures">
+    <div style="font-size:30px">⚔️</div>
+    <h3>Anime Adventures</h3>
+    <p>Gems, Star Remnants and more rewards.</p>
+    <button onclick="openGame('anime')">View codes →</button>
+   </div>
+   <div class="card" data-name="blox fruits">
+    <div style="font-size:30px">🍎</div>
+    <h3>Blox Fruits</h3>
+    <p>XP boosts, stat resets and rewards.</p>
+    <button onclick="openGame('blox')">View codes →</button>
+   </div>
   </div>
-  <div class="card" data-name="blox fruits">
-   <div class="icon">🍎</div>
-   <h3>Blox Fruits</h3>
-   <p>Discover Blox Fruits code updates and rewards.</p>
-   <button onclick="openGame('Blox Fruits')">View codes →</button>
+  <p id="empty" style="display:none;color:#aaa">No games found.</p>
+ </section>
+
+ <section id="codePage">
+  <button class="back" onclick="goHome()">← Back to games</button>
+  <h2 id="gameTitle"></h2>
+  <p class="muted" id="gameDescription"></p>
+  <p class="muted">Last checked: November 24, 2026. Check codes in-game before relying on them.</p>
+  <div class="codebox">
+   <h3>🟢 Codes listed as active</h3>
+   <div id="activeCodes"></div>
   </div>
-  <div class="card" data-name="blade ball">
-   <div class="icon">🏐</div>
-   <h3>Blade Ball</h3>
-   <p>Find Blade Ball rewards and code information.</p>
-   <button onclick="openGame('Blade Ball')">View codes →</button>
+  <div class="codebox" style="margin-top:15px">
+   <h3>🟡 Unconfirmed codes</h3>
+   <div id="unconfirmedCodes"></div>
   </div>
-  <div class="card" data-name="dress to impress">
-   <div class="icon">👗</div>
-   <h3>Dress to Impress</h3>
-   <p>Find the latest code updates for DTI.</p>
-   <button onclick="openGame('Dress to Impress')">View codes →</button>
+  <div class="note">
+   Codes can expire at any time and may have level or account requirements.
+   CodeRub does not guarantee that a code will work for every player.
   </div>
-  <div class="card" data-name="king legacy">
-   <div class="icon">👑</div>
-   <h3>King Legacy</h3>
-   <p>Explore King Legacy code information.</p>
-   <button onclick="openGame('King Legacy')">View codes →</button>
-  </div>
-  <div class="card" data-name="pet simulator 99">
-   <div class="icon">🐾</div>
-   <h3>Pet Simulator 99</h3>
-   <p>Find rewards and code updates.</p>
-   <button onclick="openGame('Pet Simulator 99')">View codes →</button>
-  </div>
- </div>
- <p id="empty" style="display:none;color:#aaa">No games found.</p>
- <div class="notice">
-  CodeRub is an independent fan-made website. It is not affiliated with or endorsed by Roblox. Codes may expire; always verify them in the official game.
+ </section>
+
+ <div class="note">
+  CodeRub is an independent fan-made website. It is not affiliated with or endorsed by Roblox or the game developers.
  </div>
 </main>
 
 <footer>© 2026 CodeRub · Made for Roblox players</footer>
 
 <script>
+const database = {
+ anime:{
+  title:"Anime Adventures Codes",
+  description:"Redeem codes for free Anime Adventures rewards.",
+  active:[
+   ["2MILLIONFAVES","1 Star Remnant and 2,000 Gems · Level 20+"],
+   ["SUMMERCOMEBACK","Free rewards · Level 20+"],
+   ["CELESTIALCOMPASSU21","Celestial Compass and reported 500 Gems"],
+   ["AACOMEBACK","Free rewards · Level 10+"],
+   ["APRILFOOLS","Free rewards · Level 20+ · Status may vary"]
+  ],
+  pending:[
+   ["SWORDSMITH","Newly reported reward · Level 20+ · Not yet confirmed across trackers"]
+  ]
+ },
+ blox:{
+  title:"Blox Fruits Codes",
+  description:"Redeem codes for XP boosts, stat resets and other rewards.",
+  active:[
+   ["EASTEREXP","2x EXP boost · 20 minutes"],
+   ["LIGHTNINGABUSE","2x EXP boost · 20 minutes"],
+   ["SUB2GAMERROBOT_RESET1","Free stat reset"],
+   ["Chandler","Joke code · 0 cash"],
+   ["Axiore","2x EXP boost"],
+   ["Bignews","In-game title"],
+   ["Bluxxy","2x EXP boost"],
+   ["Enyu_is_Pro","2x EXP boost"],
+   ["Fudd10","1 Beli"],
+   ["Fudd10_v2","2 Beli"],
+   ["JCWK","2x EXP boost"],
+   ["KITT_RESET","Free stat reset"],
+   ["Kittgaming","2x EXP boost"],
+   ["Magicbus","2x EXP boost"],
+   ["Starcodeheo","2x EXP boost"],
+   ["StrawHatMaine","2x EXP boost"],
+   ["Sub2CaptainMaui","2x EXP boost"],
+   ["Sub2Daigrock","2x EXP boost"],
+   ["Sub2Fer999","2x EXP boost"],
+   ["SUB2GAMERROBOT_EXP1","2x EXP boost · 30 minutes"],
+   ["Sub2NoobMaster123","2x EXP boost"],
+   ["Sub2OfficialNoobie","2x EXP boost"],
+   ["Sub2UncleKizaru","Free stat reset"],
+   ["TantaiGaming","2x EXP boost"],
+   ["TheGreatAce","2x EXP boost"]
+  ],
+  pending:[]
+ }
+};
+
+function makeCodeRow(item){
+ const [code,reward]=item;
+ const row=document.createElement("div");
+ row.className="code-row";
+ const info=document.createElement("div");
+ const name=document.createElement("div");
+ name.className="code";
+ name.textContent=code;
+ const desc=document.createElement("div");
+ desc.className="reward";
+ desc.textContent=reward;
+ info.append(name,desc);
+ const btn=document.createElement("button");
+ btn.className="copy";
+ btn.textContent="Copy";
+ btn.onclick=async()=>{
+  try{
+   await navigator.clipboard.writeText(code);
+   btn.textContent="Copied!";
+   setTimeout(()=>btn.textContent="Copy",1300);
+  }catch(e){
+   const area=document.createElement("textarea");
+   area.value=code;
+   document.body.appendChild(area);
+   area.select();
+   document.execCommand("copy");
+   area.remove();
+   btn.textContent="Copied!";
+   setTimeout(()=>btn.textContent="Copy",1300);
+  }
+ };
+ row.append(info,btn);
+ return row;
+}
+
+function openGame(key){
+ const game=database[key];
+ document.getElementById("home").style.display="none";
+ document.getElementById("codePage").style.display="block";
+ document.getElementById("gameTitle").textContent=game.title;
+ document.getElementById("gameDescription").textContent=game.description;
+ const active=document.getElementById("activeCodes");
+ const pending=document.getElementById("unconfirmedCodes");
+ active.replaceChildren();
+ pending.replaceChildren();
+ game.active.forEach(item=>active.appendChild(makeCodeRow(item)));
+ if(game.pending.length){
+  game.pending.forEach(item=>pending.appendChild(makeCodeRow(item)));
+ }else{
+  pending.textContent="No unconfirmed codes currently listed.";
+ }
+ window.scrollTo(0,0);
+}
+
+function goHome(){
+ document.getElementById("codePage").style.display="none";
+ document.getElementById("home").style.display="block";
+ window.scrollTo(0,0);
+}
+
 function searchGames(){
- let q=document.getElementById('search').value.toLowerCase();
- let cards=document.querySelectorAll('.card');
+ const q=document.getElementById("search").value.toLowerCase().trim();
  let count=0;
- cards.forEach(card=>{
-  let match=card.dataset.name.includes(q);
-  card.style.display=match?'block':'none';
+ document.querySelectorAll(".card").forEach(card=>{
+  const match=card.dataset.name.includes(q);
+  card.style.display=match?"block":"none";
   if(match)count++;
  });
- document.getElementById('empty').style.display=count?'none':'block';
+ document.getElementById("empty").style.display=count?"none":"block";
 }
-function openGame(name){
- alert(name+' code page coming soon! We will add verified codes here.');
-}
-document.getElementById('search').addEventListener('input',searchGames);
 </script>
 </body>
 </html>
+
+
